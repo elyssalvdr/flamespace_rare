@@ -34,7 +34,7 @@
                         <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Login">
                     </div>
                     <div class="text-center">
-                        <p>Not registered? <a class="link-text" href="{{ route('register') }}">Create an account.</a></p>
+                        <p>Not registered? <a class="link-text" href="{{ route('register') }}">Create an account</a></p>
                     </div>
                 </form>
             </div>
