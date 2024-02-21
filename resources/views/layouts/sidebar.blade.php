@@ -3,7 +3,7 @@
         <div class="header_prof"> {{ Auth::user()->name }} </div>
     </header>
     <div class="l-navbar" id="nav-bar">
-        <nav class="nav">
+        <nav class="side-nav">
             <div> 
                 <a href="{{ route('dashboard') }}" class="nav_logo"> 
                     <i class='bx bx-layer nav_logo-icon'></i> 
