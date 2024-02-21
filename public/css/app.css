@@ -69,10 +69,6 @@ a {
     box-shadow: 0 2px 5px rgba(88, 88, 88, 0.201);
 }
 
-.header_img img {
-    width: 40px
-}
-
 .l-navbar {
     position: fixed;
     top: 0;
@@ -168,8 +164,8 @@ a {
         padding: 0 2rem 0 calc(var(--nav-width) + 2rem)
     }
 
-    .header_img {
-        width: 40px;
+    .header_prof {
+        width: auto;
         height: 40px
     }
 
@@ -303,4 +299,26 @@ body {
     color: #697B54;
     cursor: pointer;
     text-decoration: underline;
+}
+
+.dashboard-card {
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 2px 5px rgba(88, 88, 88, 0.201);
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.dashboard-header {
+    color: #697B54;
+    text-align: center;
+    font-size: 36px;
+    width: 100%;
+    border-bottom: 2px;
+    box-shadow: 0 5px 5px -5px rgba(88, 88, 88, 0.201);
+    padding: 10px 0;
 }

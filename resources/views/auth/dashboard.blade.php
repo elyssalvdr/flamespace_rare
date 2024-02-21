@@ -7,9 +7,9 @@
         <div >
             @include('layouts.sidebar')
         </div>
-        <div class="col-md-9">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+        <div class="dashboard-container">
+            <div class="dashboard-card">
+                <div class="dashboard-header">Dashboard</div>
                 <div class="card-body">
                     @if ($message = Session::get('success'))
                     <div class="alert alert-success">
