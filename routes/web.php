@@ -1,6 +1,13 @@
 <?php
+
+use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\RoomsController;
+use App\Http\Controllers\SchedulesController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\Admin\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +32,9 @@ Route::controller(LoginRegisterController::class)->group(function () {
     Route::get('/dashboard', 'dashboard')->name('dashboard');
     Route::post('/logout', 'logout')->name('logout');
 });
+
+Route::get('/user', [UserController::class, 'index'])->name('user');
+Route::get('/rooms', [RoomsController::class, 'index'])->name('rooms');
+Route::get('/schedules', [SchedulesController::class, 'index'])->name('schedules');
+Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar');
+Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
