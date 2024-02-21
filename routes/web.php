@@ -38,3 +38,7 @@ Route::get('/rooms', [RoomsController::class, 'index'])->name('rooms');
 Route::get('/schedules', [SchedulesController::class, 'index'])->name('schedules');
 Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar');
 Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
