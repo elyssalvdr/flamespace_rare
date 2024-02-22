@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Rooms;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -17,7 +18,7 @@ class RoomsController extends Controller
      */
     public function index(): View
     {
-        return view('rooms.index', [
+        return view('admin.rooms.index', [
             'rooms' => Rooms::latest()->paginate(3)
         ]);
     }
@@ -27,7 +28,7 @@ class RoomsController extends Controller
      */
     public function create(): View
     {
-        return view('rooms.create');
+        return view('admin.rooms.create');
     }
 
     /**
@@ -36,7 +37,7 @@ class RoomsController extends Controller
     public function store(StoreRoomsRequest $request): RedirectResponse
     {
         Rooms::create($request->all());
-        return redirect()->route('rooms.index')
+        return redirect()->route('admin.rooms.index')
             ->withSuccess('New room is added successfully.');
     }
 
@@ -45,7 +46,7 @@ class RoomsController extends Controller
      */
     public function show(Rooms $rooms): View
     {
-        return view('rooms.show', [
+        return view('admin.rooms.show', [
             'rooms' => $rooms
         ]);
     }
@@ -55,7 +56,7 @@ class RoomsController extends Controller
      */
     public function edit(Rooms $rooms): View
     {
-        return view('rooms.edit', [
+        return view('admin.rooms.edit', [
             'rooms' => $rooms
         ]);
     }
@@ -76,7 +77,7 @@ class RoomsController extends Controller
     public function destroy(Rooms $rooms): RedirectResponse
     {
         $rooms->delete();
-        return redirect()->route('rooms.index')
+        return redirect()->route('admin.rooms.index')
             ->withSuccess('Room is deleted successfully.');
     }
 }

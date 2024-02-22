@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CalendarController;
-use App\Http\Controllers\SchedulesController;
+use App\Http\Controllers\Admin\SchedulesController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginRegisterController;
@@ -34,17 +34,15 @@ Route::controller(LoginRegisterController::class)->group(function () {
     Route::post('/logout', 'logout')->name('logout');
 });
 
+Route::resource('rooms', RoomsController::class);
+Route::resource('schedules', SchedulesController::class);
+
+
+
 Route::get('/user', [UserController::class, 'index'])->name('user');
 Route::get('/rooms', [RoomsController::class, 'index'])->name('rooms');
 Route::get('/schedules', [SchedulesController::class, 'index'])->name('schedules');
-Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar');
+Route::get('/calendar', [CalendarController::class, 'calendar'])->name('calendar');
 Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('calendar', 'CalendarController@index')->name('calendar');
-
-
-Route::resource('rooms', RoomsController::class);
-Route::get('/admin/rooms', 'RoomsController@index')->name('admin.rooms.index');

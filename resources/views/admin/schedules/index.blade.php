@@ -16,40 +16,42 @@
         @endif
 
         <div class="card">
-            <div class="card-header">Room List</div>
+            <div class="card-header">Schedules</div>
             <div class="card-body">
-                <a href="{{ route('rooms.create') }}" class="btn btn-success btn-sm my-2"><i
-                        class="bi bi-plus-circle"></i> Add New Room</a>
+                <a href="{{ route('schedules.create') }}" class="col-md-3 offset-md-5 btn btn-primary "><i
+                        class="bi bi-plus-circle"></i> Add New Schedule</a>
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Building</th>
-                            <th scope="col">Capacity</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Start Time</th>
+                            <th scope="col">End Time</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($rooms as $rooms)
+                        @forelse ($schedules as $schedules)
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $rooms->code }}</td>
-                            <td>{{ $rooms->building }}</td>
-                            <td>{{ $rooms->capacity }}</td>
+                            <td>{{ $schedules->id }}</td>
+                            <td>{{ $schedules->title }}</td>
+                            <td>{{ $schedules-> start_time }}</td>
+                            <td>{{ $schedules-> end_time }}</td>
+
                             <td>
-                                <form action="{{ route('rooms.destroy', $rooms->id) }}" method="post">
+                                <form action="{{ route('schedules.destroy', $schedules->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
 
-                                    <a href="{{ route('rooms.show', $rooms->id) }}"
+                                    <a href="{{ route('schedules.show', $schedules->id) }}"
                                         class="btn btn-warning btn-sm"><i class="bi bi-eye"></i>Show</a>
 
-                                    <a href="{{ route('rooms.edit', $rooms->id) }}"
+                                    <a href="{{ route('schedules.edit', $schedules->id) }}"
                                         class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i>Edit</a>
 
                                     <button type="submit" class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Do you want to delete this room?');"><i
+                                        onclick="return confirm('Do you want to delete this schedule?');"><i
                                             class="bi bi-trash"></i>Delete</button>
                                 </form>
                             </td>
@@ -57,14 +59,14 @@
                         @empty
                         <td colspan="6">
                             <span class="text-danger">
-                                <strong>No Room Found!</strong>
+                                <strong>No Schedule Found!</strong>
                             </span>
                         </td>
                         @endforelse
                     </tbody>
                 </table>
 
-                {{ $rooms->links() }}
+                {{ $schedules->links() }}
 
             </div>
         </div>

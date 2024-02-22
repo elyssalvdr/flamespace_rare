@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
+            $table->bigIncrements('id');
+            $table->string('title');
+            $table->datetime('start_time');
+            $table->datetime('end_time');
             $table->timestamps();
         });
     }
