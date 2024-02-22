@@ -46,4 +46,3 @@ Route::get('/calendar', [CalendarController::class, 'calendar'])->name('calendar
 Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
 
 Auth::routes();
-
