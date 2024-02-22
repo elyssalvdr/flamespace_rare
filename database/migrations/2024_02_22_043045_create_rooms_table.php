@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rooms', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
+            $table->string('code')->unique();
             $table->string('name');
-            $table->integer('capacity')->nullable();
+            $table->string('building');
+            $table->integer('capacity');
             $table->longText('description')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

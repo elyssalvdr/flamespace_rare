@@ -11,10 +11,8 @@ class Rooms extends Model
 
     protected $fillable = [
         'name',
+        'building',
         'capacity',
-        'created_at',
-        'updated_at',
-        'deleted_at',
         'description',
     ];
 

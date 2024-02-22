@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\CalendarController;
-use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\SchedulesController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\RoomsController;
+
 
 
 /*
@@ -44,3 +45,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('rooms', RoomsController::class);
+Route::get('/admin/rooms', 'RoomsController@index')->name('admin.rooms.index');
