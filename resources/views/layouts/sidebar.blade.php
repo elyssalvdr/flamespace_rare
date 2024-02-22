@@ -6,7 +6,7 @@
         <nav class="side-nav">
             <div> 
                 <a href="{{ route('dashboard') }}" class="nav_logo"> 
-                    <i class='bx bx-layer nav_logo-icon'></i> 
+                    <i class='bi bi-fire'></i> 
                     <span class="nav_logo-name">FlameSpace </span> 
                 </a>
                 <div class="nav_list"> 
@@ -19,15 +19,15 @@
                         <span class="nav_name">Users</span> 
                     </a> 
                     <a href="{{ route('admin.rooms.index') }}" class="nav_link"> 
-                        <i class='bx bx-message-square-detail nav_icon'></i> 
+                        <i class='bi bi-building'></i> 
                         <span class="nav_name">Rooms</span> 
                     </a> 
                     <a href="{{ route('schedules') }}" class="nav_link"> 
-                        <i class='bx bx-bookmark nav_icon'></i> 
+                        <i class='bi bi-calendar-event'></i> 
                         <span class="nav_name">Schedules</span> 
                     </a> 
                     <a href="{{ route('calendar') }}" class="nav_link"> 
-                        <i class='bx bx-folder nav_icon'></i> 
+                        <i class='bi bi-calendar'></i> 
                         <span class="nav_name">Calendar</span> 
                     </a>
                 </div>
