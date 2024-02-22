@@ -23,9 +23,8 @@ class StoreRoomsRequest extends FormRequest
     {
         return [
             'code' => 'required|string|max:50|unique:rooms,code',
-            'name' => 'required|string|max:250',
-            'building' => 'required|integer|min:1|max:10000',
-            'capacity' => 'required|integer|min:1|max:10000',
+            'building' => 'required|string|min:1|max:250',
+            'capacity' => 'required|integer|min:1|max:100',
             'description' => 'nullable|string'
         ];
     }

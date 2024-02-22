@@ -18,7 +18,7 @@
                         <i class='bx bx-user nav_icon'></i> 
                         <span class="nav_name">Users</span> 
                     </a> 
-                    <a href="{{ route('admin.rooms.index') }}" class="nav_link"> 
+                    <a href="{{ route('rooms') }}" class="nav_link"> 
                         <i class='bx bx-message-square-detail nav_icon'></i> 
                         <span class="nav_name">Rooms</span> 
                     </a> 

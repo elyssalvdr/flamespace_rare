@@ -3,6 +3,9 @@
 
 <div class="row justify-content-center mt-3">
     <div class="col-md-8">
+        <div>
+            @include('layouts.sidebar')
+        </div>
 
         <div class="card">
             <div class="card-header">
@@ -18,7 +21,7 @@
                     @csrf
 
                     <div class="mb-3 row">
-                        <label for="code" class="col-md-4 col-form-label text-md-end text-start">Number</label>
+                        <label for="code" class="col-md-4 col-form-label text-md-end text-start">Room</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control @error('code') is-invalid @enderror" id="code"
                                 name="code" value="{{ old('code') }}">
@@ -29,22 +32,10 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Name</label>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                                name="name" value="{{ old('name') }}">
-                            @if ($errors->has('name'))
-                            <span class="text-danger">{{ $errors->first('name') }}</span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="mb-3 row">
                         <label for="building" class="col-md-4 col-form-label text-md-end text-start">Building</label>
                         <div class="col-md-6">
-                                                                    ///changed quan to buil///
-                            <input type="number" class="form-control @error('building') is-invalid @enderror"
-                                id="building" name="building" value="{{ old('building') }}">
+                            <input type="text" class="form-control @error('building') is-invalid @enderror" id="building"
+                                name="building" value="{{ old('building') }}">
                             @if ($errors->has('building'))
                             <span class="text-danger">{{ $errors->first('building') }}</span>
                             @endif
@@ -54,13 +45,14 @@
                     <div class="mb-3 row">
                         <label for="capacity" class="col-md-4 col-form-label text-md-end text-start">Capacity</label>
                         <div class="col-md-6">
-                            <input type="number" step="0.01" class="form-control @error('capacity') is-invalid @enderror"
+                            <input type="number" class="form-control @error('capacity') is-invalid @enderror"
                                 id="capacity" name="capacity" value="{{ old('capacity') }}">
-                            @if ($errors->has('capacity'))
+                            @if ($errors->has('building'))
                             <span class="text-danger">{{ $errors->first('capacity') }}</span>
                             @endif
                         </div>
                     </div>
+
 
                     <div class="mb-3 row">
                         <label for="description"
