@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\Admin\CalendarController;
 use App\Http\Controllers\SchedulesController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +43,8 @@ Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('calendar', 'CalendarController@index')->name('calendar');
+
 
 Route::resource('rooms', RoomsController::class);
 Route::get('/admin/rooms', 'RoomsController@index')->name('admin.rooms.index');
