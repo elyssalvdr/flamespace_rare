@@ -11,11 +11,15 @@ class Rooms extends Model
 
     protected $fillable = [
         'name',
+        'capacity',
+        'created_at',
+        'updated_at',
+        'deleted_at',
         'description',
     ];
 
-    // public function events()
-    // {
-    //     return $this->hasMany(Event::class);
-    // }
+    public function events()
+    {
+        return $this->hasMany(Schedules::class);
+    }
 }
