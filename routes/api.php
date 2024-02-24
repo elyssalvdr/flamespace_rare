@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\RoomsController;
+use App\Http\Controllers\Admin\RoomsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginRegisterController;
@@ -39,3 +39,33 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/rooms/{id}', 'destroy');
     });
 });
+
+//dashboard
+Route::get('/dashboard', 'DashboardController@index');
+
+//users
+Route::get('/users', 'UserController@index');
+Route::get('/users/search', 'UserController@search');
+Route::post('/users/add', 'UserController@store');
+Route::delete('/users/{id}', 'UserController@destroy');
+Route::put('/users/{id}', 'UserController@update');
+
+//rooms
+Route::get('/rooms', 'RoomController@index');
+Route::get('/rooms/filter/{building}', 'RoomController@filterByBuilding');
+Route::post('/rooms/add', 'RoomController@store');
+Route::get('/rooms/{id}', 'RoomController@show');
+Route::delete('/rooms/{id}', 'RoomController@destroy');
+Route::put('/rooms/{id}', 'RoomController@update');
+
+//schedules
+Route::get('/schedules', 'ScheduleController@index');
+Route::get('/schedules/filter/{room}', 'ScheduleController@filterByRoom');
+Route::post('/schedules/add', 'ScheduleController@store');
+Route::get('/schedules/{id}', 'ScheduleController@show');
+Route::delete('/schedules/{id}', 'ScheduleController@destroy');
+Route::put('/schedules/{id}', 'ScheduleController@update');
+
+//calendar
+Route::get('/calendar', 'CalendarController@index');
+Route::get('/calendar/filter', 'CalendarController@filter');

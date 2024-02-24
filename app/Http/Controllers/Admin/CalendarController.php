@@ -15,6 +15,8 @@ class CalendarController extends Controller
      */
     public function calendar()
     {
+
+        //not final pa
         $events = [];
 
         $start_dates = ['2023-06-01', '2023-06-07', '2023-06-11', '2023-06-12T10:30:00', '2023-06-12', '2023-06-12', '2023-06-13', '2023-06-28'];
