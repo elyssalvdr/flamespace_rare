@@ -36,7 +36,7 @@ Route::controller(LoginRegisterController::class)->group(function () {
 
 Route::resource('rooms', RoomsController::class);
 Route::resource('schedules', SchedulesController::class);
-
+// Route::get('/dashboard', 'DashboardController@dashboardView')->name('dashboard');
 
 
 Route::get('/user', [UserController::class, 'index'])->name('user');
