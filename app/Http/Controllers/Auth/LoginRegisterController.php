@@ -48,7 +48,9 @@ class LoginRegisterController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'updated_at' => now(),  // Assuming you want to set the current timestamp for 'updated_at'
+            'created_at' => now()   // Assuming you want to set the current timestamp for 'created_at'
         ]);
 
         $credentials = $request->only('email', 'password');
