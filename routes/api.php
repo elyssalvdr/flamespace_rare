@@ -4,6 +4,7 @@ use App\Http\Controllers\RoomsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +16,12 @@ use App\Http\Controllers\Auth\LoginRegisterController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-// Public routes of authentication
-Route::controller(LoginRegisterController::class)->group(function () {
-    Route::post('/register', 'register');
-    Route::post('/login', 'login');
+Route::middleware('auth:api')->get('/user', function (Resquest $request) {
+    return $request->user();
 });
+// Public routes of authentication
+Route::post('/auth/register', [AuthController::class,'register']);
+Route::post('/auth/login', [AuthController::class,'login']);
 
 // Public routes of rooms
 Route::controller(RoomsController::class)->group(function () {
