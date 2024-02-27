@@ -48,7 +48,6 @@ class LoginRegisterController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-<<<<<<< HEAD
             'password' => Hash::make($request->password),
             'updated_at' => now(),  // Assuming you want to set the current timestamp for 'updated_at'
             'created_at' => now()   // Assuming you want to set the current timestamp for 'created_at'
@@ -62,21 +61,6 @@ class LoginRegisterController extends Controller
         return redirect()->route('dashboard')
             ->withSuccess('You have successfully registered & logged in!');
     }
-=======
-            'password' => $request->password,
-            'confirm_password' => $request->input('confirm_password', ''),
-         ]);
-     
-         $credentials = $request->only('email', 'password');
-     
-         if (Auth::attempt($credentials)) {
-             $request->session()->regenerate();
-             return redirect()->route('dashboard')->withSuccess('You have successfully registered & logged in!');
-         } else {
-             return redirect()->back()->withErrors(['password' => 'Invalid credentials']);
-         }
-     }
->>>>>>> 2e732f79eb7afa98e36f9b8d6b2b95d598006c24
 
     /**
      * Display a login form.
