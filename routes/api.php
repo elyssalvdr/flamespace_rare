@@ -16,27 +16,16 @@ use App\Http\Controllers\Api\AuthController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::middleware('auth:api')->get('/user', function (Resquest $request) {
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 // Public routes of authentication
 Route::post('/auth/register', [AuthController::class,'register']);
 Route::post('/auth/login', [AuthController::class,'login']);
 
-// Public routes of rooms
-Route::controller(RoomsController::class)->group(function () {
-    Route::get('/rooms', 'index');
-    Route::get('/rooms/{id}', 'show');
-    Route::get('/rooms/search/{name}', 'search');
-});
 
 // Protected routes of rooms and logout
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [LoginRegisterController::class, 'logout']);
-    
-    Route::controller(RoomsController::class)->group(function () {
-        Route::post('/rooms', 'store');
-        Route::post('/rooms/{id}', 'update');
-        Route::delete('/rooms/{id}', 'destroy');
-    });
+
 });
