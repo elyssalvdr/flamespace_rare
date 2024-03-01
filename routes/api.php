@@ -21,7 +21,7 @@ use App\Http\Controllers\Api\CalendarController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::middleware('auth:api')->get('/user', function (Resquest $request) {
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 // Public routes of authentication 
@@ -62,19 +62,4 @@ Route::delete('/schedules/{id}', [ScheduleController::class, 'destroy']);
 Route::get('calendar', [CalendarController::class, 'index']);
 Route::get('/rooms/filter', [RoomController::class, 'filter']);
 
-/*// Public routes of rooms
-Route::controller(RoomsController::class)->group(function () {
-    Route::get('/rooms', 'index');
-    Route::get('/rooms/{id}', 'show');
-    Route::get('/rooms/search/{name}', 'search');
 });
-
-// Protected routes of rooms
-Route::middleware('auth:sanctum')->group(function () {
-    
-    Route::controller(RoomsController::class)->group(function () {
-        Route::post('/rooms', 'store');
-        Route::post('/rooms/{id}', 'update');
-        Route::delete('/rooms/{id}', 'destroy');
-    });
-});*/

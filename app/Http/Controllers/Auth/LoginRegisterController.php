@@ -50,17 +50,17 @@ class LoginRegisterController extends Controller
             'email' => $request->email,
             'password' => $request->password,
             'confirm_password' => $request->input('confirm_password', ''),
-         ]);
-     
-         $credentials = $request->only('email', 'password');
-     
-         if (Auth::attempt($credentials)) {
-             $request->session()->regenerate();
-             return redirect()->route('dashboard')->withSuccess('You have successfully registered & logged in!');
-         } else {
-             return redirect()->back()->withErrors(['password' => 'Invalid credentials']);
-         }
-     }
+        ]);
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->route('dashboard')->withSuccess('You have successfully registered & logged in!');
+        } else {
+            return redirect()->back()->withErrors(['password' => 'Invalid credentials']);
+        }
+    }
 
     /**
      * Display a login form.
