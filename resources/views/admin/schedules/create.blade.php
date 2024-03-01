@@ -13,7 +13,7 @@
                     Add New Schedule
                 </div>
                 <div class="float-end">
-                    <a href="{{ route('schedules.index') }}" class="col-md-3 offset-md-5 btn btn-primary">&larr; Back</a>
+                    <a href="{{ route('schedules') }}" class="col-md-3 offset-md-5 btn btn-primary">&larr; Back</a>
                 </div>
             </div>
             <div class="card-body">

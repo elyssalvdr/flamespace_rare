@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->bigIncrements('id');
-            $table->string('title');
-            $table->datetime('start_time');
-            $table->datetime('end_time');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('room_id')->constrained();
+            $table->dateTime('start_time');
+            $table->dateTime('end_time');
+            $table->string('reference_number');
             $table->timestamps();
+
+            // Foreign key constraint
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
         });
     }
 

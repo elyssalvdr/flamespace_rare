@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -12,10 +13,10 @@ return new class extends Migration {
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
+            $table->string('room_number');
             $table->string('building');
             $table->integer('capacity');
-            $table->longText('description');
+            $table->enum('status', ['available', 'not available']);
             $table->timestamps();
         });
     }

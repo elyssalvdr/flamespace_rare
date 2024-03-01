@@ -5,21 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rooms extends Model
+class Room extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'room_number',
         'building',
         'capacity',
-        'description',
-        'room_number',
+        'image',
         'status',
     ];
-
-    public function events()
-    {
-        return $this->hasMany(Schedules::class);
-    }
 }

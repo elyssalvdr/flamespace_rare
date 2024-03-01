@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoomsController;
+use App\http\Controllers\Api\ScheduleController;
+use App\http\Controllers\Api\RoomController;
 
 
 
@@ -36,11 +38,13 @@ Route::controller(LoginRegisterController::class)->group(function () {
 
 Route::resource('rooms', RoomsController::class);
 Route::resource('schedules', SchedulesController::class);
-// Route::get('/dashboard', 'DashboardController@dashboardView')->name('dashboard');
+//Route::get('/dashboard', 'DashboardController@dashboardView')->name('dashboard');
 
 
 Route::get('/user', [UserController::class, 'index'])->name('user');
+Route::get('/rooms', [RoomController::class, 'index'])->name('rooms');
 Route::get('/rooms', [RoomsController::class, 'index'])->name('rooms');
+Route::get('/schedules', [ScheduleController::class, 'index'])->name('schedules');
 Route::get('/schedules', [SchedulesController::class, 'index'])->name('schedules');
 Route::get('/calendar', [CalendarController::class, 'calendar'])->name('calendar');
 Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
