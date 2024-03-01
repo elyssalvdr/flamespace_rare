@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -77,7 +78,22 @@ class AuthController extends Controller
                 'errors'=>$validator->errors()
             ], 400);
         }
-
     }
+    public function logout(Request $request){
+        $user = Auth::user();
+    
+        if ($user) {
+            $user->tokens()->delete();
+    
+            return response()->json([
+                'message' => 'Successfully logged out'
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'User not authenticated'
+            ], 401);
+        }
+    }
+    
 }
 

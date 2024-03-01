@@ -13,7 +13,7 @@
                     Add New Room
                 </div>
                 <div class="float-end">
-                    <a href="{{ route('rooms.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
+                    <a href="{{ route('rooms') }}" class="btn btn-primary btn-sm">&larr; Back</a>
                 </div>
             </div>
             <div class="card-body">
