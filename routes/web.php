@@ -1,14 +1,13 @@
 <?php
 
-use App\Http\Controllers\Admin\CalendarController;
-use App\Http\Controllers\Admin\SchedulesController;
-use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CalendarController;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\RoomsController;
-use App\http\Controllers\Api\ScheduleController;
-use App\http\Controllers\Api\RoomController;
+use App\http\Controllers\Admin\ScheduleController;
+use App\http\Controllers\Admin\RoomController;
 
 
 
@@ -27,26 +26,46 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::controller(LoginRegisterController::class)->group(function () {
+Route::controller(AuthController::class)->group(function () {
     Route::get('/register', 'register')->name('register');
-    Route::post('/store', 'store')->name('store');
     Route::get('/login', 'login')->name('login');
-    Route::post('/authenticate', 'authenticate')->name('authenticate');
-    Route::get('/dashboard', 'dashboard')->name('dashboard');
     Route::post('/logout', 'logout')->name('logout');
+
+    //dashboard
+    Route::get('/dashboard', [DashboardController::class, 'dashboard']);
+
+    //users
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+    Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+    //rooms
+    Route::get('/rooms', [RoomController::class, 'index'])->name('rooms.index');
+    Route::get('/rooms/create', [RoomController::class, 'create'])->name('rooms.create');
+    Route::post('/rooms', [RoomController::class, 'store'])->name('rooms.store');
+    Route::get('/rooms/{id}', [RoomController::class, 'show'])->name('rooms.show');
+    Route::get('/rooms/{id}/edit', [RoomController::class, 'edit'])->name('rooms.edit');
+    Route::put('/rooms/{id}', [RoomController::class, 'update'])->name('rooms.update');
+    Route::delete('/rooms/{id}', [RoomController::class, 'destroy'])->name('rooms.destroy');
+
+    //sched
+    Route::get('/schedules', [ScheduleController::class, 'index'])->name('schedules.index');
+    Route::get('/schedules/create', [ScheduleController::class, 'create'])->name('schedules.create');
+    Route::post('/schedules', [ScheduleController::class, 'store'])->name('schedules.store');
+    Route::get('/schedules/{id}', [ScheduleController::class, 'show'])->name('schedules.show');
+    Route::get('/schedules/{id}/edit', [ScheduleController::class, 'edit'])->name('schedules.edit');
+    Route::put('/schedules/{id}', [ScheduleController::class, 'update'])->name('schedules.update');
+    Route::delete('/schedules/{id}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
+
+    //calendar
+    Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar.index');
+    Route::post('/calendar/filter', [CalendarController::class, 'filter'])->name('calendar.filter');
+
 });
 
-Route::resource('rooms', RoomsController::class);
-Route::resource('schedules', SchedulesController::class);
-//Route::get('/dashboard', 'DashboardController@dashboardView')->name('dashboard');
-
-
-Route::get('/user', [UserController::class, 'index'])->name('user');
-Route::get('/rooms', [RoomController::class, 'index'])->name('rooms');
-Route::get('/rooms', [RoomsController::class, 'index'])->name('rooms');
-Route::get('/schedules', [ScheduleController::class, 'index'])->name('schedules');
-Route::get('/schedules', [SchedulesController::class, 'index'])->name('schedules');
-Route::get('/calendar', [CalendarController::class, 'calendar'])->name('calendar');
-Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
 
 Auth::routes();

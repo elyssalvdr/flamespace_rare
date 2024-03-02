@@ -62,4 +62,3 @@ Route::delete('/schedules/{id}', [ScheduleController::class, 'destroy']);
 Route::get('calendar', [CalendarController::class, 'index']);
 Route::get('/rooms/filter', [RoomController::class, 'filter']);
 
-});
