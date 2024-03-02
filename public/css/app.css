@@ -308,6 +308,8 @@ body {
     text-decoration: underline;
 }
 
+/* dashboard */
+
 .dashboard-container {
     width: 100%;
     height: 700px;
@@ -326,4 +328,36 @@ body {
     border-bottom: 2px;
     box-shadow: 0 5px 5px -5px rgba(88, 88, 88, 0.201);
     padding: 10px 0;
+}
+
+.dashboard {
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+.room-counts {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.available-rooms,
+.reserved-rooms {
+    text-align: center;
+}
+
+.room-lists {
+    margin-top: 20px;
+}
+
+.available-rooms-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.available-rooms-list li {
+    margin-bottom: 10px;
 }
