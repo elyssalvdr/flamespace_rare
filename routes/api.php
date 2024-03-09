@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\ScheduleController;
-use App\Http\Controllers\Api\CalendarController;
+use App\Http\Controllers\Admin\FullCalendarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +21,9 @@ use App\Http\Controllers\Api\CalendarController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 // Public routes of authentication 
 Route::post('/auth/register', [AuthController::class,'register']);
 Route::post('/auth/login', [AuthController::class,'login']);
@@ -59,6 +59,4 @@ Route::put('/schedules/{id}', [ScheduleController::class, 'update']);
 Route::delete('/schedules/{id}', [ScheduleController::class, 'destroy']);
 
 // Calendar
-Route::get('calendar', [CalendarController::class, 'index']);
-Route::get('/rooms/filter', [RoomController::class, 'filter']);
-
+Route::get('/api/events', [FullCalendarController::class, 'getEvents']);

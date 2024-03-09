@@ -8,7 +8,7 @@
         <div class="card-login">
             <div class="card-header">Register</div>
             <div class="card-body">
-                <form action="{{ route('store') }}" method="post">
+                <form action="{{ route('register') }}" method="post">
                     @csrf
                     <div class="mb-3 row">
                         <div class="col-md-6">
@@ -40,7 +40,7 @@
                     <div class="mb-3 row">
                         <div class="col-md-6">
                             <input type="password" class="form-control-login" id="password_confirmation"
-                                name="password_confirmation" placeholder="Password">
+                                name="password_confirmation" placeholder="Confirm password">
                         </div>
                     </div>
                     <div class="mb-3 row">

@@ -1,33 +1,25 @@
-@extends('layouts.app')
+@extends('layouts.layouts')
 
 @section('content')
-    <div class="container">
-        <h1>Calendar</h1>
-        
-        <!-- Calendar -->
-        <div id="calendar"></div>
+
+<div class="container-tbl">
+    <div>
+        @include('layouts.sidebar')
     </div>
-@endsection
 
-@push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                events: [
-                    @foreach($events as $event)
-                        {
-                            title: '{{ $event['title'] }}',
-                            start: '{{ $event['start'] }}',
-                            end: '{{ $event['end'] }}'
-                        },
-                    @endforeach
-                ]
-            });
+    <div id='calendar'></div>
+</div>
 
-            calendar.render();
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: @json($events)
         });
-    </script>
-@endpush
+        calendar.render();
+    });
+</script>
+
+@endsection

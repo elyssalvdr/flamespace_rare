@@ -6,20 +6,26 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Schedule;
 use App\Models\Room;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
+
 
 class ScheduleController extends Controller
 {
     public function index()
     {
-        $schedules = Schedule::all();
-        return view('schedules.index', ['schedules' => $schedules]);
+        $users = User::all();
+        $rooms = Room::where('capacity', '>=', 1)->where('capacity', '<=', 200)->get();
+        $schedules = Schedule::paginate(8);
+        return view('schedules.index', ['schedules' => $schedules, 'users' => $users, 'rooms' => $rooms]);
     }
 
     public function create()
     {
-        $rooms = Room::all();
-        return view('schedules.create', ['rooms' => $rooms]);
+        $users = User::all();
+        $rooms = Room::where('capacity', '>=', 1)->where('capacity', '<=', 200)->get();
+        return view('schedules.create', ['users' => $users, 'rooms' => $rooms]);
     }
 
     public function store(Request $request)
@@ -47,10 +53,16 @@ class ScheduleController extends Controller
 
     public function show($id)
     {
+        // Retrieve the schedule with the given ID
         $schedule = Schedule::findOrFail($id);
-        return view('schedules.show', ['schedule' => $schedule]);
-    }
 
+        // Retrieve user's name and room number associated with the schedule
+        $userName = $schedule->user->name;
+        $roomNumber = $schedule->room->room_number;
+
+        // Pass the schedule, user name, and room number to the view
+        return view('schedules.show', compact('schedule', 'userName', 'roomNumber'));
+    }
     public function edit($id)
     {
         $schedule = Schedule::findOrFail($id);
@@ -87,16 +99,23 @@ class ScheduleController extends Controller
         return redirect()->route('schedules.index')->with('success', 'Schedule updated successfully');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $schedule = Schedule::find($id);
+        $scheduleIds = explode(',', $request->input('ids'));
 
-        if (!$schedule) {
-            return response()->json(['error' => 'Schedule not found'], 404);
+        foreach ($scheduleIds as $scheduleId) {
+            $schedule = Schedule::find($scheduleId);
+
+            if ($schedule) {
+                $schedule->delete();
+            } else {
+                Log::error('Schedule with ID ' . $scheduleId . ' not found');
+
+                return response()->json(['error' => 'Schedule not found'], 404);
+            }
         }
 
-        $schedule->delete();
-
-        return redirect()->route('schedules.index')->with('success', 'Schedule deleted successfully');
+        return redirect()->back()->with('success', 'Schedules deleted successfully');
     }
+
 }

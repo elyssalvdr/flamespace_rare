@@ -23,7 +23,7 @@ class DashboardController extends Controller
         return response()->json([
             'available_rooms' => $availableRoomsCount,
             'reserved_rooms' => $reservedRoomsCount,
-            'available_rooms_list' => $availableRooms,
+            // 'available_rooms_list' => $availableRooms,
         ]);
     }
 }

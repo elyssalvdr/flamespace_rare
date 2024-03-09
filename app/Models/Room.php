@@ -13,7 +13,6 @@ class Room extends Model
         'room_number',
         'building',
         'capacity',
-        'image',
         'status',
     ];
 }

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function dashboard()
     {
         $reservedRoomsIds = Schedule::where('end_time', '>', now())->pluck('room_id')->toArray();
 
@@ -20,10 +20,10 @@ class DashboardController extends Controller
         $availableRoomsCount = $availableRooms->count();
         $reservedRoomsCount = count($reservedRoomsIds);
 
-        return view('dashboard.index', [
+        return view('layouts.dashboard', [
             'available_rooms_count' => $availableRoomsCount,
             'reserved_rooms_count' => $reservedRoomsCount,
-            'available_rooms' => $availableRooms,
+            // 'available_rooms' => $availableRooms,
         ]);
     }
 }

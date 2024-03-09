@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(8);
         return view('users.index', ['users' => $users]);
     }
 
@@ -31,7 +31,6 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
-            'student_number' => 'required|string|unique:users',
             'password' => 'required|string|min:8',
         ]);
 
@@ -42,7 +41,6 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'student_number' => $request->input('student_number'),
             'password' => bcrypt($request->input('password')),
         ]);
 
@@ -60,7 +58,6 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
-            'student_number' => 'required|string|unique:users,student_number,' . $id,
             'password' => 'nullable|string|min:8',
         ]);
 
@@ -76,7 +73,6 @@ class UserController extends Controller
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->student_number = $request->input('student_number');
 
         if ($request->has('password')) {
             $user->password = bcrypt($request->input('password'));
@@ -95,6 +91,12 @@ class UserController extends Controller
             return response()->json(['error' => 'User not found'], 404);
         }
 
+        // Check if there are associated schedules
+        if ($user->schedules()->exists()) {
+            return redirect()->route('users.index')->with('error', 'Cannot delete user because of associated schedules.');
+        }
+
+        // If no associated sched, proceed with deletion
         $user->delete();
 
         return redirect()->route('users.index')->with('success', 'User deleted successfully');
