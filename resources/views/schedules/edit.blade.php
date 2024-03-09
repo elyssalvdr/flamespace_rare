@@ -1,36 +1,45 @@
-@extends('layouts.app')
-
-@section('content')
-
-<div class="container-xl">
-    <div class="card">
-        <div class="card-header">
-            <h3>Edit Schedule</h3>
-        </div>
-        <div class="card-body">
-            <form action="{{ route('schedules.update', $schedule->id) }}" method="POST">
+<!-- edit -->
+<div id="editScheduleModal{{ $schedule->id }}" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ route('schedules.update', $schedule->id) }}">
                 @csrf
                 @method('PUT')
-                <div class="form-group">
-                    <label for="user_id">User ID</label>
-                    <input type="text" name="user_id" id="user_id" class="form-control" value="{{ $schedule->user_id }}" required>
+                <div class="modal-header">                        
+                    <h4 class="modal-title">Edit Schedule</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
-                <div class="form-group">
-                    <label for="room_id">Room ID</label>
-                    <input type="text" name="room_id" id="room_id" class="form-control" value="{{ $schedule->room_id }}" required>
+                <div class="modal-body">                    
+                    <div class="form-group">
+                        <label>User</label>
+                        <select name="user_id" class="form-control" required>
+                            @foreach($users as $user)
+                                <option value="{{ $user->id }}" {{ $schedule->user_id == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Room</label>
+                        <select name="room_id" class="form-control" required>
+                            @foreach($rooms as $room)
+                                <option value="{{ $room->id }}" {{ $schedule->room_id == $room->id ? 'selected' : '' }}>{{ $room->room_number }} - {{ $room->building }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Start Time</label>
+                        <input type="datetime-local" name="start_time" class="form-control" value="{{ $schedule->start_time }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>End Time</label>
+                        <input type="datetime-local" name="end_time" class="form-control" value="{{ $schedule->end_time }}" required>
+                    </div>               
                 </div>
-                <div class="form-group">
-                    <label for="start_time">Start Time</label>
-                    <input type="datetime-local" name="start_time" id="start_time" class="form-control" value="{{ date('Y-m-d\TH:i', strtotime($schedule->start_time)) }}" required>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Save Changes</button>
                 </div>
-                <div class="form-group">
-                    <label for="end_time">End Time</label>
-                    <input type="datetime-local" name="end_time" id="end_time" class="form-control" value="{{ date('Y-m-d\TH:i', strtotime($schedule->end_time)) }}" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Update Schedule</button>
             </form>
         </div>
     </div>
 </div>
-
-@endsection

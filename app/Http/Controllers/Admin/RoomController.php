@@ -12,9 +12,10 @@ class RoomController extends Controller
 {
     public function index()
     {
-        $rooms = Room::all();
-        return view('rooms.index', ['rooms' => $rooms]);
+        $rooms = Room::paginate(8);
+        return view('rooms.index', compact('rooms'));
     }
+
 
     public function create()
     {
@@ -28,7 +29,7 @@ class RoomController extends Controller
             'building' => 'required|string',
             'capacity' => 'required|integer|min:1',
             'status' => 'required|in:available,not available',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
         ]);
 
         if ($validator->fails()) {
@@ -40,7 +41,7 @@ class RoomController extends Controller
             'building' => $request->input('building'),
             'capacity' => $request->input('capacity'),
             'status' => $request->input('status'),
-            'image' => $request->file('image') ? $request->file('image')->store('room_images', 'public') : null,
+            // 'image' => $request->file('image') ? $request->file('image')->store('room_images', 'public') : null,
         ]);
 
         return redirect()->route('rooms.index')->with('success', 'Room added successfully');
@@ -69,7 +70,7 @@ class RoomController extends Controller
             'building' => 'required|string',
             'capacity' => 'required|integer|min:1',
             'status' => 'required|in:available,not available',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
         ]);
 
         if ($validator->fails()) {
@@ -87,9 +88,9 @@ class RoomController extends Controller
         $room->capacity = $request->input('capacity');
         $room->status = $request->input('status');
 
-        if ($request->file('image')) {
-            $room->image = $request->file('image')->store('room_images', 'public');
-        }
+        // if ($request->file('image')) {
+        //     $room->image = $request->file('image')->store('room_images', 'public');
+        // }
 
         $room->save();
 

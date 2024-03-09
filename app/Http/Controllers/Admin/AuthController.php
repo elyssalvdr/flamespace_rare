@@ -34,6 +34,9 @@ class AuthController extends Controller
             'password' => bcrypt($request->password)
         ]);
 
+
+        session(['admin_name' => $user->name]);
+
         return redirect()->route('login')->with('success', 'Registration successful. Please log in.');
     }
 
@@ -43,12 +46,15 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    // Process login form submission
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+
+            $request->session()->put('admin_name', $user->name);
+
             $request->session()->regenerate();
 
             return redirect()->intended('/');
@@ -63,6 +69,8 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
+
+        $request->session()->forget('admin_name');
 
         $request->session()->invalidate();
 

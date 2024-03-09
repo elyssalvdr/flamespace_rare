@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Room;
 use App\Models\Schedule;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 class ScheduleController extends Controller
@@ -57,6 +58,10 @@ class ScheduleController extends Controller
             return response()->json(['error' => 'Schedule not found'], 404);
         }
 
+        // Retrieve user's name and room number associated with the schedule
+        $userName = $schedule->user->name;
+        $roomNumber = $schedule->room->room_number;
+
         return response()->json($schedule);
     }
 
@@ -102,4 +107,15 @@ class ScheduleController extends Controller
         return response()->json(['message' => 'Schedule updated successfully', 'schedule' => $schedule]);
     }
 
+    public function getUsers()
+    {
+        $users = User::all();
+        return response()->json($users);
+    }
+
+    public function getRooms()
+    {
+        $rooms = Room::where('capacity', '>=', 1)->where('capacity', '<=', 200)->get();
+        return response()->json($rooms);
+    }
 }

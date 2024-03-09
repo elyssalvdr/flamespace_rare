@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\CalendarController;
+use App\Http\Controllers\Admin\FullCalendarController;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\Admin\UserController;
 use App\http\Controllers\Admin\ScheduleController;
@@ -32,8 +32,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/logout', 'logout')->name('logout');
 
     //dashboard
-    Route::get('/dashboard', [DashboardController::class, 'dashboard']);
-
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('layouts.dashboard');
+    Route::get('/home', [DashboardController::class, 'dashboard'])->name('layouts.dashboard');
     //users
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
@@ -62,8 +62,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::delete('/schedules/{id}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
 
     //calendar
-    Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar.index');
-    Route::post('/calendar/filter', [CalendarController::class, 'filter'])->name('calendar.filter');
+    Route::get('/calendar', [FullCalendarController::class, 'calendar'])->name('calendar.index');
 
 });
 

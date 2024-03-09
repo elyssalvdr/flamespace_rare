@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -30,9 +31,11 @@ class AuthController extends Controller
     $user=User::create([
         'name'=>$request->name,
         'email'=>$request->email,
-        'password'=>hash::make($request->password)
+        'password'=>Hash::make($request->password)
 
     ]);
+
+    Session::put('admin_name', $user->name);
 
     return response()->json([
         'message'=>'Registration Successful',
@@ -57,6 +60,8 @@ class AuthController extends Controller
 
         if($user){
             if(Hash::check($request->password,$user->password)){
+
+                Session::put('admin_name', $user->name);
 
                 $token=$user->createToken('auth-token')->plainTextToken;
                 return response()->json([
@@ -84,6 +89,8 @@ class AuthController extends Controller
     
         if ($user) {
             $user->tokens()->delete();
+
+            Session::put('admin_name', $user->name);
     
             return response()->json([
                 'message' => 'Successfully logged out'
