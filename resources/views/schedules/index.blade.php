@@ -14,8 +14,7 @@
                         <h2>Manage <b>Schedules</b></h2>
                     </div>
                     <div class="col-sm-6">
-                        <button href="#addScheduleModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Schedule</span></button>
-                        <button class="btn btn-danger" onclick="deleteSelectedSchedules()"><i class="material-icons">&#xE15C;</i> <span>Delete</span></button>                        
+                        <button class="btn btn-danger" onclick="deleteSelectedSchedules()"><i class="material-icons">&#xE15C;</i> <span>Delete Selected Schedules</span></button>                        
                     </div>
                 </div>
             </div>
@@ -65,7 +64,6 @@
     </div>        
 </div>
 
-@include('schedules.create')
 
 @include('schedules.edit', ['schedule' => $schedule])
 

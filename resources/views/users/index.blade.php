@@ -11,7 +11,7 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2><b>Manage Users</b></h2>
+                        <h2>Manage <b>Users</b></h2>
                     </div>
                     <div class="col-sm-6">
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addUserModal">

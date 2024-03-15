@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-sm-6">
                         <button href="#addRoomModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Room</span></button>
-                        <button class="btn btn-danger" onclick="deleteSelectedRooms()"><i class="material-icons">&#xE15C;</i> <span>Delete</span></button>                        
+                        <button class="btn btn-danger" onclick="deleteSelectedRooms()"><i class="material-icons">&#xE15C;</i> <span>Delete Selected Rooms</span></button>                        
                     </div>
                 </div>
             </div>
@@ -69,29 +69,6 @@
 
 @include('rooms.edit', ['room' => $room]) 
 
-<!-- Delete -->
-<div id="deleteRoomModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form id="delete-room-form" action="{{ route('rooms.destroy', ':roomId') }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <div class="modal-header">                        
-                    <h4 class="modal-title">Delete Room</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">                    
-                    <p id="delete-warning-message">Are you sure you want to delete these rooms?</p>
-                    <p class="text-warning"><small>This action cannot be undone.</small></p>
-                </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>

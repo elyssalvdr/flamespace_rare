@@ -67,7 +67,7 @@ class UserController extends Controller
             return back()->with('error', 'Failed to delete user. Please try again later.');
         }
     }
-    
+
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -95,6 +95,6 @@ class UserController extends Controller
 
         $user->save();
 
-        return response()->json(['message' => 'User updated successfully', 'user' => $user]);
+        return response()->json(['success' => 'User updated successfully']);
     }
 }
